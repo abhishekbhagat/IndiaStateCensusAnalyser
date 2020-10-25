@@ -7,7 +7,7 @@ public class CensusAnalyserTest {
 	private static final String INDIA_CENSUS_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCensusData.csv";
 	private static final String WRONG_FILE_PATH = "";
 	private static final String INDIA_STATE_CODE_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndianStateCodeData.csv";
-
+	private static final String WRONG_FILE_TYPE_PATH = "F:\\ContactPerson-File.txt";
 	@Test
 	public void givenIndianCensusData_ShouldReturnNoOfRecords() {
 		try {
@@ -46,4 +46,14 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
 		}
 	}
+	@Test
+	public void givenIndiaStateCodeData_WithWrongFile_Type_ShouldThrowCustomExceptiont() {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			censusAnalyser.loadIndiaStateCodeCensusData(WRONG_FILE_TYPE_PATH);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+		}
+	}
+	
 }
