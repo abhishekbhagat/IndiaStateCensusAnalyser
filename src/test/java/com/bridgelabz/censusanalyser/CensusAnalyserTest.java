@@ -29,6 +29,17 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
 		}
 	}
+	@Test
+	public void givenIndiaStateCodeCensusData_WhenSortedOnStateCode_ShouldReturnSortedResult() throws CSVException, IOException {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			String sortedCensusData= censusAnalyser.getStatedWiseSortedCensusData();
+			CSVStates[] censusList=new Gson().fromJson(sortedCensusData,CSVStates[].class);
+			Assert.assertEquals("BH",censusList[0].stateCode);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
+		}
+	}
 
 	@Test
 	public void givenIndianCensusData_ShouldReturnNoOfRecords() throws CSVException {
