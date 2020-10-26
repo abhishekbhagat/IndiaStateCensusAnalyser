@@ -8,6 +8,9 @@ public class CensusAnalyserTest {
 	private static final String WRONG_FILE_PATH = "";
 	private static final String INDIA_STATE_CODE_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndianStateCodeData.csv";
 	private static final String WRONG_FILE_TYPE_PATH = "F:\\ContactPerson-File.txt";
+	private static final String CENSUS_INVALID_DELIMETER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCensusDelimeter.csv";
+	private static final String CENSUS_INVALID_HEADER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCensusInvalidHeader.csv";
+	private static final String INDIA_STATE_CODE_INVALID_DELIMETER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCodeInvalidDelimeter.csv";
 	@Test
 	public void givenIndianCensusData_ShouldReturnNoOfRecords() {
 		try {
@@ -19,7 +22,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndianCensusData_WithWrongFile_ShouldThrowCustomExceptiont() {
+	public void givenIndianCensusData_WithWrongFile_ShouldThrowExceptionCorrect() {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaCensusData(WRONG_FILE_PATH);
@@ -28,6 +31,35 @@ public class CensusAnalyserTest {
 		}
 	}
 
+	@Test
+	public void givenIndianCensusData_WithWrongFile_Type_ShouldThrowCustomExceptiont() {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			censusAnalyser.loadIndiaCensusData(WRONG_FILE_TYPE_PATH);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+		}
+	}
+
+	@Test
+	public void givenIndianCensusData_With_Invalid_Delimeter_ShouldThrowCustomExceptiont() {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			censusAnalyser.loadIndiaCensusData(CENSUS_INVALID_DELIMETER_FILE_PATH);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM, e.type);
+		}
+	}
+
+	@Test
+	public void givenIndianCensusData_With_Invalid_Header_ShouldThrowCustomExceptiont() {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			censusAnalyser.loadIndiaCensusData(CENSUS_INVALID_HEADER_FILE_PATH);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.HEADER_PROBLEM, e.type);
+		}
+	}
 	@Test
 	public void givenIndiaStateCodeData_ShouldReturnNoOfRecord() {
 		try {
@@ -53,6 +85,15 @@ public class CensusAnalyserTest {
 			censusAnalyser.loadIndiaStateCodeCensusData(WRONG_FILE_TYPE_PATH);
 		} catch (CensusAnalyserException e) {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+		}
+	}
+	@Test
+	public void givenIndiaStateCodeData_With_Invalid_Delimeter_ShouldThrowCustomExceptiont() {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			censusAnalyser.loadIndiaStateCodeCensusData(INDIA_STATE_CODE_INVALID_DELIMETER_FILE_PATH);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM, e.type);
 		}
 	}
 	
