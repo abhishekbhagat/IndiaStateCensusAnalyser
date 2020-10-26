@@ -1,18 +1,26 @@
 package com.bridgelabz.censusanalyser;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
-import java.util.stream.StreamSupport;
-
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 public class CensusAnlayser {
 	public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
+			BufferedReader br = new BufferedReader(new FileReader(csvFilePath));
+			String indiaStateCensusData = "";
+			while ((indiaStateCensusData = br.readLine()) != null) {
+				if (!indiaStateCensusData.contains(","))
+					throw new CensusAnalyserException("Invalid delimiter in csv file",
+							CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
+			}
+			br.close();
 			CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
 			csvToBeanBuilder.withType(IndiaCensusCSV.class);
 			csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
