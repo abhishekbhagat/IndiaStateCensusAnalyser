@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 
 public class CensusAnlayser {
-	public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
+	public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException, CSVException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
 			BufferedReader br = new BufferedReader(new FileReader(csvFilePath));
 			String indiaStateCensusData = "";
@@ -28,7 +28,7 @@ public class CensusAnlayser {
 		}
 	}
 
-	public int loadIndiaStateCodeCensusData(String csvFilePath) throws CensusAnalyserException {
+	public int loadIndiaStateCodeCensusData(String csvFilePath) throws CensusAnalyserException, CSVException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
 			BufferedReader br = new BufferedReader(new FileReader(csvFilePath));
 			String indiaStateCode = "";
