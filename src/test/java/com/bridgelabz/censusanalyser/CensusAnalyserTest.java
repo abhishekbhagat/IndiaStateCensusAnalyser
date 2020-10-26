@@ -13,7 +13,7 @@ public class CensusAnalyserTest {
 	private static final String WRONG_FILE_TYPE_PATH = "F:\\ContactPerson-File.txt";
 
 	@Test
-	public void givenIndianCensusData_ShouldReturnNoOfRecords() {
+	public void givenIndianCensusData_ShouldReturnNoOfRecords() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_FILE_PATH);
@@ -23,7 +23,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndianCensusData_WithWrongFile_ShouldThrowExceptionCorrect() {
+	public void givenIndianCensusData_WithWrongFile_ShouldThrowExceptionCorrect() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaCensusData(WRONG_FILE_PATH);
@@ -33,7 +33,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndianCensusData_WithWrongFile_Type_ShouldThrowCustomExceptiont() {
+	public void givenIndianCensusData_WithWrongFile_Type_ShouldThrowCustomExceptiont() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaCensusData(WRONG_FILE_TYPE_PATH);
@@ -43,7 +43,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndianCensusData_With_Invalid_Delimeter_ShouldThrowCustomExceptiont() {
+	public void givenIndianCensusData_With_Invalid_Delimeter_ShouldThrowCustomExceptiont() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaCensusData(CENSUS_INVALID_DELIMETER_FILE_PATH);
@@ -53,7 +53,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndianCensusData_With_Invalid_Header_ShouldThrowCustomExceptiont() {
+	public void givenIndianCensusData_With_Invalid_Header_ShouldThrowCustomExceptiont() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaCensusData(CENSUS_INVALID_HEADER_FILE_PATH);
@@ -63,7 +63,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndiaStateCodeData_ShouldReturnNoOfRecord() {
+	public void givenIndiaStateCodeData_ShouldReturnNoOfRecord() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			int numOfRecords = censusAnalyser.loadIndiaStateCodeCensusData(INDIA_STATE_CODE_FILE_PATH);
@@ -73,7 +73,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndiaStateCodeData_WithWrongFile_ShouldThrowCustomExceptiont() {
+	public void givenIndiaStateCodeData_WithWrongFile_ShouldThrowCustomExceptiont() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaStateCodeCensusData(WRONG_FILE_PATH);
@@ -83,7 +83,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndiaStateCodeData_WithWrongFile_Type_ShouldThrowCustomExceptiont() {
+	public void givenIndiaStateCodeData_WithWrongFile_Type_ShouldThrowCustomExceptiont() throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaStateCodeCensusData(WRONG_FILE_TYPE_PATH);
@@ -93,7 +93,7 @@ public class CensusAnalyserTest {
 	}
 
 	@Test
-	public void givenIndiaStateCodeData_With_Invalid_Delimeter_ShouldThrowCustomExceptiont() {
+	public void givenIndiaStateCodeData_With_Invalid_Delimeter_ShouldThrowCustomExceptiont()throws CSVException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaStateCodeCensusData(INDIA_STATE_CODE_INVALID_DELIMETER_FILE_PATH);
