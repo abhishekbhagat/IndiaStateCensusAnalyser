@@ -21,10 +21,12 @@ public class CensusAnalyserTest {
 	public void givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult() throws CSVException, IOException {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
-			String sortedCensusData= censusAnalyser.getStatedWiseSortedCensusData(INDIA_CENSUS_FILE_PATH);
+			censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_FILE_PATH);
+			String sortedCensusData= censusAnalyser.getStatedWiseSortedCensusData();
 			IndiaCensusCSV[] censusList=new Gson().fromJson(sortedCensusData,IndiaCensusCSV[].class);
 			Assert.assertEquals("Bengal",censusList[0].state);
 		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
 		}
 	}
 
