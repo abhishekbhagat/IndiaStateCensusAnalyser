@@ -99,6 +99,15 @@ public class CensusAnlayser {
 		return sortedStateCensus;
 	}
 
+	public String getAreaPerSqkm_WiseSortedCensusData() throws CensusAnalyserException {
+		if (censusCSVList == null || censusCSVList.size() == 0)
+			throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+		Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.areaSqKm);
+		this.sortdesc(censusCSVList, censusComparator);
+		String sortedStateCensus = new Gson().toJson(censusCSVList);
+		return sortedStateCensus;
+	}
+
 	private <E> void sort(List<E> censusList, Comparator<E> censusComparator) {
 		for (int i = 0; i < censusList.size() - 1; i++) {
 			for (int j = 0; j < censusList.size() - i - 1; j++) {

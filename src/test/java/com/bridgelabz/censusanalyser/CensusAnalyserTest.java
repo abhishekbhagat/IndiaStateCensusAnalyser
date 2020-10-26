@@ -18,6 +18,20 @@ public class CensusAnalyserTest {
 	private static final String WRONG_FILE_TYPE_PATH = "F:\\ContactPerson-File.txt";
 
 	@Test
+	public void givenIndianCensusData_WhenSortedOnAreaPerSqkm_ShouldReturnSortedResult()
+			throws CSVException, IOException {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_FILE_PATH);
+			String sortedCensusData = censusAnalyser.getAreaPerSqkm_WiseSortedCensusData();
+			IndiaCensusCSV[] censusList = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
+			Assert.assertEquals(308245, censusList[0].areaSqKm);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
+		}
+	}
+
+	@Test
 	public void givenIndianCensusData_WhenSortedOnPopulation_ShouldReturnSortedResult()
 			throws CSVException, IOException {
 		try {
