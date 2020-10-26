@@ -7,8 +7,6 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
 
 public class CensusAnlayser {
 	public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
@@ -21,7 +19,8 @@ public class CensusAnlayser {
 							CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
 			}
 			br.close();
-			Iterator<IndiaCensusCSV> censusCSVIterator = getFileIterator(reader, IndiaCensusCSV.class);
+			Iterator<IndiaCensusCSV> censusCSVIterator = new OpenCSVBuilder().getFileIterator(reader,
+					IndiaCensusCSV.class);
 			return getCount(censusCSVIterator);
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(),
@@ -39,8 +38,7 @@ public class CensusAnlayser {
 							CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
 			}
 			br.close();
-			Iterator<CSVStates> censusCSVIterator = getFileIterator(reader, CSVStates.class);
-
+			Iterator<CSVStates> censusCSVIterator = new OpenCSVBuilder().getFileIterator(reader, CSVStates.class);
 			return getCount(censusCSVIterator);
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(),
@@ -48,22 +46,10 @@ public class CensusAnlayser {
 		}
 	}
 
-	private <E> Iterator<E> getFileIterator(Reader reader, Class csvClass) throws CensusAnalyserException {
-		try {
-			CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<E>(reader);
-			csvToBeanBuilder.withType(csvClass);
-			csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-			CsvToBean<E> csvToBean = csvToBeanBuilder.build();
-			return csvToBean.iterator();
-		} catch (IllegalStateException e) {
-			throw new CensusAnalyserException("Invalid type", CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
-		}
-	}
-
 	private <E> int getCount(Iterator<E> iterator) {
 		int numOfEntries = 0;
 		while (iterator.hasNext()) {
-			E censuscsvData = iterator.next();
+			E iteratorData = iterator.next();
 			numOfEntries++;
 		}
 		return numOfEntries;
