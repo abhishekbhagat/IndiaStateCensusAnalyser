@@ -61,6 +61,7 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.HEADER_PROBLEM, e.type);
 		}
 	}
+
 	@Test
 	public void givenIndiaStateCodeData_ShouldReturnNoOfRecord() {
 		try {
@@ -70,6 +71,7 @@ public class CensusAnalyserTest {
 		} catch (CensusAnalyserException e) {
 		}
 	}
+
 	@Test
 	public void givenIndiaStateCodeData_WithWrongFile_ShouldThrowCustomExceptiont() {
 		try {
@@ -79,6 +81,7 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
 		}
 	}
+
 	@Test
 	public void givenIndiaStateCodeData_WithWrongFile_Type_ShouldThrowCustomExceptiont() {
 		try {
@@ -88,14 +91,15 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
 		}
 	}
+
 	@Test
 	public void givenIndiaStateCodeData_With_Invalid_Delimeter_ShouldThrowCustomExceptiont() {
 		try {
 			CensusAnlayser censusAnalyser = new CensusAnlayser();
 			censusAnalyser.loadIndiaStateCodeCensusData(INDIA_STATE_CODE_INVALID_DELIMETER_FILE_PATH);
 		} catch (CensusAnalyserException e) {
-                      Assert.assertEquals(CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM, e.type);
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM, e.type);
 		}
 	}
-	
+
 }
