@@ -10,6 +10,8 @@ public class CensusAnalyserTest {
 	private static final String CENSUS_INVALID_DELIMETER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCensusDelimeter.csv";
 	private static final String CENSUS_INVALID_HEADER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCensusInvalidHeader.csv";
 	private static final String INDIA_STATE_CODE_INVALID_DELIMETER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCodeInvalidDelimeter.csv";
+	private static final String WRONG_FILE_TYPE_PATH = "F:\\ContactPerson-File.txt";
+
 	@Test
 	public void givenIndianCensusData_ShouldReturnNoOfRecords() {
 		try {
