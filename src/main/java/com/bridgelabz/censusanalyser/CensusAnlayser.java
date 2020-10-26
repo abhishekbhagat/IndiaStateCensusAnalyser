@@ -72,6 +72,15 @@ public class CensusAnlayser {
 		return sortedStateCensus;
 	}
 
+	public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
+		if (censusCSVList == null || censusCSVList.size() == 0)
+			throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+		Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.population);
+		this.sortdesc(censusCSVList, censusComparator);
+		String sortedStateCensus = new Gson().toJson(censusCSVList);
+		return sortedStateCensus;
+	}
+
 	public String getStateCode_WiseSortedCensusData() throws CensusAnalyserException {
 		if (censusCodeCSVList == null || censusCodeCSVList.size() == 0)
 			throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
@@ -87,6 +96,19 @@ public class CensusAnlayser {
 				E census1 = censusList.get(i);
 				E census2 = censusList.get(j + 1);
 				if (censusComparator.compare(census1, census2) > 0) {
+					censusList.set(i, census2);
+					censusList.set(j + 1, census1);
+				}
+			}
+		}
+	}
+
+	private <E> void sortdesc(List<E> censusList, Comparator<E> censusComparator) {
+		for (int i = 0; i < censusList.size() - 1; i++) {
+			for (int j = 0; j < censusList.size() - i - 1; j++) {
+				E census1 = censusList.get(i);
+				E census2 = censusList.get(j + 1);
+				if (censusComparator.compare(census1, census2) < 0) {
 					censusList.set(i, census2);
 					censusList.set(j + 1, census1);
 				}
