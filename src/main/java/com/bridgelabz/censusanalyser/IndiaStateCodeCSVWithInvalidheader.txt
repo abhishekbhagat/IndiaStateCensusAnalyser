@@ -1,7 +1,0 @@
-Stat,StateCode
-Jharkhand,JH
-Gujarat,GJ
-Jammu and Kashmir,JK
-Karnataka,KA
-Punjab,PB
-Bihar,BH
