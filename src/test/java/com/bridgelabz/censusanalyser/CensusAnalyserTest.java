@@ -1,6 +1,11 @@
 package com.bridgelabz.censusanalyser;
 
 import org.junit.Test;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
 import org.junit.Assert;
 
 public class CensusAnalyserTest {
@@ -11,6 +16,17 @@ public class CensusAnalyserTest {
 	private static final String CENSUS_INVALID_HEADER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCensusInvalidHeader.csv";
 	private static final String INDIA_STATE_CODE_INVALID_DELIMETER_FILE_PATH = "C:\\Users\\abhis\\eclipse-workspace\\day21assignment\\src\\main\\java\\com\\bridgelabz\\censusanalyser\\IndiaStateCodeInvalidDelimeter.csv";
 	private static final String WRONG_FILE_TYPE_PATH = "F:\\ContactPerson-File.txt";
+
+	@Test
+	public void givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult() throws CSVException, IOException {
+		try {
+			CensusAnlayser censusAnalyser = new CensusAnlayser();
+			String sortedCensusData= censusAnalyser.getStatedWiseSortedCensusData(INDIA_CENSUS_FILE_PATH);
+			IndiaCensusCSV[] censusList=new Gson().fromJson(sortedCensusData,IndiaCensusCSV[].class);
+			Assert.assertEquals("Bengal",censusList[0].state);
+		} catch (CensusAnalyserException e) {
+		}
+	}
 
 	@Test
 	public void givenIndianCensusData_ShouldReturnNoOfRecords() throws CSVException {
@@ -101,5 +117,6 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM, e.type);
 		}
 	}
+	
 
 }
